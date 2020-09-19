@@ -77,7 +77,7 @@ function buildData(id) {
         d3.json("athletes_merged.json").then((data)=> {
             console.log(data)
             data.Name.forEach(function(name) {
-                dropdown.append("option").text(name).property("value");
+                dropdown.append("option").text(Name).property("Name");
             });
             //Build Plotly plots from data
             buildData(data.Name[0]);
