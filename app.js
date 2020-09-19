@@ -76,12 +76,12 @@ function buildData(id) {
         var dropdown = d3.select("#selDataset");
         d3.json("athletes_merged.json").then((data)=> {
             console.log(data)
-            data.names.forEach(function(name) {
+            data.Name.forEach(function(name) {
                 dropdown.append("option").text(name).property("value");
             });
             //Build Plotly plots from data
-            buildData(data.names[0]);
-            getInfo(data.names[0]);
+            buildData(data.Name[0]);
+            getInfo(data.Name[0]);
         });
     }
     init();
