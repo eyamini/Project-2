@@ -4,9 +4,9 @@ function buildData(id) {
         d3.json("athletes_merged.json").then (SampleData =>{
             var ids = SampleData.athletes_merged[0].Name;
             var input =  SampleData.athletes_merged[0].earnings_million.slice(0,10).reverse();
-            var label =  SampleData.athletes_merged[0].otu_labels.slice(0,10);
-            var otu = ( SampleData.athletes_merged[0].Name.slice(0, 10)).reverse();
-            var otu_id = otu.map(d => "OTU " + d);
+            var label =  SampleData.athletes_merged[0].Name.slice(0,10);
+            var otu = ( SampleData.athletes_merged[0].earnings_million.slice(0, 10)).reverse();
+            var otu_id = otu.map(d => "Salary " + d);
          // Organize data for building charts
             var label =  SampleData.athletes_merged[0].otu_labels.slice(0,10);
             console.log(`otu_labels: ${label}`)
