@@ -46,7 +46,7 @@ function buildData(id) {
                 text:  SampleData.athletes_merged[0].otu_labels
             };
             var layout_2 = {
-                xaxis:{title: "ID"},
+                xaxis:{title: "Name"},
                 height: 600,
                 width: 1000
             };
