@@ -1,14 +1,14 @@
 //Plotly Belly Button Biodiversity
 function buildData(id) {
-    //Retrieve metadata using athletes_merged.json
-        d3.json("athletes_merged.json").then (SampleData =>{
-            var ids = SampleData.athletes_merged[0].Name;
-            var input =  SampleData.athletes_merged[0].earnings_million.slice(0,10).reverse();
-            var label =  SampleData.athletes_merged[0].Name.slice(0,10);
-            var otu = ( SampleData.athletes_merged[0].earnings_million.slice(0, 10)).reverse();
-            var otu_id = otu.map(d => "Salary " + d);
+    //Retrieve metadata using samples.json
+        d3.json("samples.json").then (SampleData =>{
+            var ids = SampleData.samples[0].otu_ids;
+            var input =  SampleData.samples[0].sample_values.slice(0,10).reverse();
+            var label =  SampleData.samples[0].otu_labels.slice(0,10);
+            var otu = ( SampleData.samples[0].otu_ids.slice(0, 10)).reverse();
+            var otu_id = otu.map(d => "OTU " + d);
          // Organize data for building charts
-            var label =  SampleData.athletes_merged[0].otu_labels.slice(0,10);
+            var label =  SampleData.samples[0].otu_labels.slice(0,10);
             console.log(`otu_labels: ${label}`)
             var trace = {
                 x: input,
@@ -36,17 +36,17 @@ function buildData(id) {
         Plotly.newPlot("bar", data, layout);
             // Build Bubble Chart
             var trace1 = {
-                x: SampleData.athletes_merged[0].Name,
-                y: SampleData.athletes_merged[0].earnings_million,
+                x: SampleData.samples[0].otu_ids,
+                y: SampleData.samples[0].sample_values,
                 mode: "markers",
                 marker: {
-                    size: SampleData.athletes_merged[0].earnings_million,
-                    color: SampleData.athletes_merged[0].Name
+                    size: SampleData.samples[0].sample_values,
+                    color: SampleData.samples[0].otu_ids
                 },
-                text:  SampleData.athletes_merged[0].otu_labels
+                text:  SampleData.samples[0].otu_labels
             };
             var layout_2 = {
-                xaxis:{title: "Name"},
+                xaxis:{title: "ID"},
                 height: 600,
                 width: 1000
             };
@@ -56,7 +56,7 @@ function buildData(id) {
     }  
     // Data retrieval function
     function getInfo(id) {
-        d3.json("athletes_merged.json").then((data)=> {
+        d3.json("samples.json").then((data)=> {
             var metadata = data.metadata;
             var result = metadata.filter(meta => meta.id.toString() === id)[0];
             var demographicInfo = d3.select("#sample-metadata");
@@ -74,14 +74,14 @@ function buildData(id) {
     function init() {
         //Dropdown menu
         var dropdown = d3.select("#selDataset");
-        d3.json("athletes_merged.json").then((data)=> {
+        d3.json("samples.json").then((data)=> {
             console.log(data)
-            data.Name.forEach(function(name) {
-                dropdown.append("option").text(Name).property("Name");
+            data.names.forEach(function(name) {
+                dropdown.append("option").text(name).property("value");
             });
             //Build Plotly plots from data
-            buildData(data.Name[0]);
-            getInfo(data.Name[0]);
+            buildData(data.names[0]);
+            getInfo(data.names[0]);
         });
     }
     init();
