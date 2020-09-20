@@ -1,6 +1,6 @@
 //Plotly Belly Button Biodiversity
 function buildData(id) {
-    //Retrieve metadata using samples.json
+    //Retrieve metadata using athletes_merged
         d3.json("athletes_merged").then (SampleData =>{
             var ids = SampleData.athletes_merged[0].Nationality;
             var input =  SampleData.athletes_merged[0].earnings_million.slice(0,10).reverse();
@@ -56,7 +56,7 @@ function buildData(id) {
     }  
     // Data retrieval function
     function getInfo(id) {
-        d3.json("samples.json").then((data)=> {
+        d3.json("athletes_merged").then((data)=> {
             var metadata = data.metadata;
             var result = metadata.filter(meta => meta.id.toString() === id)[0];
             var demographicInfo = d3.select("#sample-metadata");
@@ -74,7 +74,7 @@ function buildData(id) {
     function init() {
         //Dropdown menu
         var dropdown = d3.select("#selDataset");
-        d3.json("samples.json").then((data)=> {
+        d3.json("athletes_merged").then((data)=> {
             console.log(data)
             data.names.forEach(function(name) {
                 dropdown.append("option").text(name).property("value");
