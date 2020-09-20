@@ -37,10 +37,10 @@ function buildData(id) {
             // Build Bubble Chart
             var trace1 = {
                 x: SampleData.athletes_merged[0].Nationality,
-                y: SampleData.athletes_merged[0].sample_values,
+                y: SampleData.athletes_merged[0].earnings_million,
                 mode: "markers",
                 marker: {
-                    size: SampleData.athletes_merged[0].sample_values,
+                    size: SampleData.athletes_merged[0].earnings_million,
                     color: SampleData.athletes_merged[0].Nationality
                 },
                 text:  SampleData.athletes_merged[0].Names
