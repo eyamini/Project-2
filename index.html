@@ -109,7 +109,7 @@ function bubbleChart() {
       .attr('dy', '.3em')
       .style('text-anchor', 'middle')
       .style('font-size', 10)
-      .text(d => d.id)
+      .text(d => d.id, d.year)
 
     // set simulation's nodes to our newly created nodes array
     // simulation starts running automatically once nodes are set
