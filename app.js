@@ -1,15 +1,15 @@
 //Plotly Belly Button Biodiversity
 function buildData(id) {
     //Retrieve metadata using samples.json
-        d3.json("samples.json").then (SampleData =>{
-            var ids = SampleData.samples[0].otu_ids;
-            var input =  SampleData.samples[0].sample_values.slice(0,10).reverse();
-            var label =  SampleData.samples[0].otu_labels.slice(0,10);
-            var otu = ( SampleData.samples[0].otu_ids.slice(0, 10)).reverse();
+        d3.json("athletes_merged").then (SampleData =>{
+            var ids = SampleData.athletes_merged[0].Nationality;
+            var input =  SampleData.athletes_merged[0].earnings_million.slice(0,10).reverse();
+            var label =  SampleData.athletes_merged[0].Name.slice(0,10);
+            var otu = ( SampleData.athletes_merged[0].Nationality.slice(0, 10)).reverse();
             var otu_id = otu.map(d => "OTU " + d);
          // Organize data for building charts
-            var label =  SampleData.samples[0].otu_labels.slice(0,10);
-            console.log(`otu_labels: ${label}`)
+            var label =  SampleData.athletes_merged[0].Names.slice(0,10);
+            console.log(`Names: ${label}`)
             var trace = {
                 x: input,
                 y: otu_id,
@@ -36,14 +36,14 @@ function buildData(id) {
         Plotly.newPlot("bar", data, layout);
             // Build Bubble Chart
             var trace1 = {
-                x: SampleData.samples[0].otu_ids,
-                y: SampleData.samples[0].sample_values,
+                x: SampleData.athletes_merged[0].Nationality,
+                y: SampleData.athletes_merged[0].sample_values,
                 mode: "markers",
                 marker: {
-                    size: SampleData.samples[0].sample_values,
-                    color: SampleData.samples[0].otu_ids
+                    size: SampleData.athletes_merged[0].sample_values,
+                    color: SampleData.athletes_merged[0].Nationality
                 },
-                text:  SampleData.samples[0].otu_labels
+                text:  SampleData.athletes_merged[0].Names
             };
             var layout_2 = {
                 xaxis:{title: "ID"},
